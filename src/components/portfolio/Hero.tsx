@@ -243,6 +243,11 @@ export function Hero() {
                 className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-70"
                 style={{ animation: "scan 4s linear infinite" }}
               />
+              {/* Holographic shimmer */}
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-1/3"
+                style={{ animation: "shimmer 5s ease-in-out infinite" }}
+              />
               <div className="absolute inset-0 flex items-center justify-center">
                 {photo ? (
                   <img

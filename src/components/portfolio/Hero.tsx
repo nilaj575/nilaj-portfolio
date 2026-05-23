@@ -244,12 +244,49 @@ export function Hero() {
                 style={{ animation: "scan 4s linear infinite" }}
               />
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-[9rem] md:text-[11rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground via-foreground/80 to-muted-foreground/40 select-none drop-shadow-2xl group-hover:scale-105 transition-transform duration-700 font-display">
-                  N
-                </span>
+                {photo ? (
+                  <img
+                    src={photo}
+                    alt="Nilaj Jana"
+                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                ) : (
+                  <span className="text-[9rem] md:text-[11rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground via-foreground/80 to-muted-foreground/40 select-none drop-shadow-2xl group-hover:scale-105 transition-transform duration-700 font-display">
+                    N
+                  </span>
+                )}
               </div>
+
+              {/* Upload overlay */}
+              <button
+                type="button"
+                onClick={() => fileRef.current?.click()}
+                className="absolute inset-0 flex items-center justify-center gap-2 bg-background/70 backdrop-blur-sm opacity-0 hover:opacity-100 transition-opacity text-sm font-mono z-20"
+                aria-label="Upload photo"
+              >
+                <Upload className="h-4 w-4" />
+                {photo ? "Change Photo" : "Upload Photo"}
+              </button>
+              <input
+                ref={fileRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFile}
+                className="hidden"
+              />
+              {photo && (
+                <button
+                  type="button"
+                  onClick={clearPhoto}
+                  className="absolute top-2 right-2 z-30 p-1.5 rounded-full glass hover:shadow-glow"
+                  aria-label="Remove photo"
+                >
+                  <X className="h-3.5 w-3.5" />
+                </button>
+              )}
               {/* Inner ring highlight */}
               <div className="absolute inset-0 rounded-full border border-white/10 shadow-[inset_0_0_40px_rgba(255,255,255,0.04)] pointer-events-none" />
+
             </div>
 
             {/* Floating HUD badges */}

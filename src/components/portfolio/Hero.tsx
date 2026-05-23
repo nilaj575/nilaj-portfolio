@@ -1,10 +1,41 @@
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Download, Mail, ArrowRight, Sparkles } from "lucide-react";
+import { Download, Mail, ArrowRight, Sparkles, Upload, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { Particles } from "./Particles";
 
+const PHOTO_KEY = "nilaj_hero_photo";
+
 export function Hero() {
+  const [photo, setPhoto] = useState<string | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(PHOTO_KEY);
+      if (saved) setPhoto(saved);
+    } catch {}
+  }, []);
+
+  const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const url = reader.result as string;
+      setPhoto(url);
+      try { localStorage.setItem(PHOTO_KEY, url); } catch {}
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const clearPhoto = () => {
+    setPhoto(null);
+    try { localStorage.removeItem(PHOTO_KEY); } catch {}
+    if (fileRef.current) fileRef.current.value = "";
+  };
+
   return (
     <section
       id="home"

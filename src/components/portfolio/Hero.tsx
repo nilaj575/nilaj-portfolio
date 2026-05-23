@@ -243,6 +243,11 @@ export function Hero() {
                 className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-70"
                 style={{ animation: "scan 4s linear infinite" }}
               />
+              {/* Holographic shimmer */}
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-transparent via-white/10 to-transparent"
+                style={{ animation: "hologram 5s ease-in-out infinite" }}
+              />
               <div className="absolute inset-0 flex items-center justify-center">
                 {photo ? (
                   <img
@@ -319,6 +324,36 @@ export function Hero() {
             >
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(74,222,128,0.7)]" />
               online
+            </motion.div>
+
+            {/* System status panel */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8 }}
+              className="hidden xl:block absolute -bottom-14 -right-6 glass rounded-2xl p-3.5 backdrop-blur-md z-10 min-w-[200px]"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground">
+                  System Status
+                </span>
+                <span className="font-mono text-[9px] text-emerald-400">98.4%</span>
+              </div>
+              <div className="flex items-end gap-1 h-8">
+                {[4, 6, 8, 5, 7, 4, 6, 8, 5, 7, 3, 6].map((h, i) => (
+                  <span
+                    key={i}
+                    className="w-1 rounded-sm bg-accent/70"
+                    style={{
+                      height: `${h * 4}px`,
+                      animation: `pulse ${1 + (i % 3) * 0.5}s ease-in-out ${i * 0.1}s infinite`,
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="mt-2 font-mono text-[9px] text-muted-foreground">
+                cpu.optimized • net.stable
+              </div>
             </motion.div>
           </div>
         </motion.div>

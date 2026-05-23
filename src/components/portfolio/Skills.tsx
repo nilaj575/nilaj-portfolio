@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import {
-  SiJavascript, SiPython, SiReact, SiAngular, SiHtml5, SiCss3,
+  SiJavascript, SiPython, SiReact, SiAngular, SiHtml5, SiCss,
   SiTailwindcss, SiBootstrap, SiNodedotjs, SiExpress, SiNextdotjs,
-  SiMongodb, SiOracle, SiSocketdotio, SiGit, SiGithub,
+  SiMongodb, SiSocketdotio, SiGit, SiGithub,
 } from "react-icons/si";
+import { Database } from "lucide-react";
 import { FaJava } from "react-icons/fa";
 import { Code, Cpu } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";

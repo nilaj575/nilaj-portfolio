@@ -1,22 +1,28 @@
 import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { Download, Mail, ArrowRight } from "lucide-react";
+import { Download, Mail, ArrowRight, Sparkles } from "lucide-react";
 import { Particles } from "./Particles";
 
 export function Hero() {
   return (
-    <section id="home" className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center pt-28 pb-16 overflow-hidden"
+    >
+      {/* Ambient background */}
       <div className="absolute inset-0 grid-bg" />
-      <Particles count={40} />
+      <div className="pointer-events-none absolute -top-32 -left-32 h-[480px] w-[480px] rounded-full bg-primary/20 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 h-[520px] w-[520px] rounded-full bg-accent/20 blur-[120px]" />
+      <Particles count={50} />
 
-      <div className="relative mx-auto max-w-6xl px-4 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center">
+      <div className="relative mx-auto max-w-6xl px-4 grid lg:grid-cols-12 gap-12 items-center">
         {/* Left */}
-        <div>
+        <div className="lg:col-span-7 space-y-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-mono text-muted-foreground"
+            className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-[11px] font-mono uppercase tracking-[0.18em] text-accent"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-75 animate-ping" />
@@ -25,47 +31,66 @@ export function Hero() {
             Available for opportunities
           </motion.div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mt-6 text-5xl md:text-7xl font-bold leading-[1.05]"
-          >
-            Hi, I'm <span className="text-gradient">Nilaj Jana</span>
-          </motion.h1>
+          <div className="space-y-3">
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-5xl md:text-7xl xl:text-[5.5rem] font-bold leading-[0.95] tracking-tight"
+            >
+              Hi, I'm{" "}
+              <span
+                className="text-transparent bg-clip-text bg-[length:200%_auto] animate-gradient-x"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(90deg, var(--neon), var(--neon-2), var(--neon))",
+                }}
+              >
+                Nilaj Jana
+              </span>
+            </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mt-4 text-2xl md:text-3xl font-semibold text-foreground/90"
-          >
-            Full Stack Developer
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-2xl md:text-3xl font-light text-foreground/80"
+            >
+              Full Stack Developer
+            </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mt-3 font-mono text-lg text-accent h-7"
-          >
-            <span className="text-muted-foreground">{"// "}</span>
-            <Typewriter
-              words={["React.js", "Node.js", "Next.js", "Express.js", "JavaScript", "Java", "Python"]}
-              loop={0}
-              cursor
-              cursorStyle="_"
-              typeSpeed={70}
-              deleteSpeed={45}
-              delaySpeed={1500}
-            />
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="font-mono text-base md:text-lg text-accent h-7 flex items-center gap-2"
+            >
+              <span className="text-muted-foreground/60">{"//"}</span>
+              <Typewriter
+                words={[
+                  "React.js",
+                  "Node.js",
+                  "Next.js",
+                  "Express.js",
+                  "JavaScript",
+                  "Java",
+                  "Python",
+                ]}
+                loop={0}
+                cursor
+                cursorStyle="_"
+                typeSpeed={70}
+                deleteSpeed={45}
+                delaySpeed={1500}
+              />
+            </motion.div>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="mt-6 max-w-xl text-muted-foreground leading-relaxed"
+            className="max-w-xl text-muted-foreground leading-relaxed text-base md:text-lg"
           >
             I build modern, scalable, and interactive web applications with clean UI and
             efficient backend systems — skilled in Node.js, Express, Next.js, React, Tailwind,
@@ -76,28 +101,29 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-8 flex flex-wrap gap-3"
+            className="flex flex-wrap gap-3"
           >
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 rounded-xl bg-gradient-primary px-5 py-3 text-sm font-medium text-primary-foreground shadow-glow hover:scale-105 transition-transform"
+              className="group relative inline-flex items-center gap-2 rounded-xl bg-gradient-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.03] active:scale-95 transition-transform overflow-hidden"
             >
-              View Projects
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <span className="absolute inset-0 translate-y-full bg-white/15 transition-transform duration-300 group-hover:translate-y-0" />
+              <span className="relative">View Projects</span>
+              <ArrowRight className="relative h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-xl glass px-5 py-3 text-sm font-medium hover:border-primary/60 transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl glass px-6 py-3.5 text-sm font-semibold hover:border-accent/60 hover:shadow-glow-cyan transition-all"
             >
               <Mail className="h-4 w-4" />
               Contact Me
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-xl border border-border px-5 py-3 text-sm font-medium hover:bg-muted/50 transition-colors"
+              className="inline-flex items-center gap-2 rounded-xl border border-border/60 px-6 py-3.5 text-sm font-semibold text-muted-foreground hover:text-foreground hover:border-border transition-colors"
             >
               <Download className="h-4 w-4" />
-              Download Resume
+              Resume
             </a>
           </motion.div>
 
@@ -105,74 +131,126 @@ export function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-8 flex items-center gap-4"
+            className="flex items-center gap-6 pt-4 border-t border-border/40"
           >
-            <span className="font-mono text-xs text-muted-foreground">Find me on</span>
-            <div className="h-px flex-1 max-w-12 bg-border" />
-            <a
-              href="https://github.com/nilaj575"
-              target="_blank"
-              rel="noreferrer"
-              className="group p-3 rounded-xl glass hover:shadow-glow hover:-translate-y-1 transition-all"
-              aria-label="GitHub"
-            >
-              <FaGithub className="h-5 w-5 group-hover:text-accent" />
-            </a>
-            <a
-              href="https://linkedin.com/in/nilaj-jana-648436338"
-              target="_blank"
-              rel="noreferrer"
-              className="group p-3 rounded-xl glass hover:shadow-glow-cyan hover:-translate-y-1 transition-all"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="h-5 w-5 group-hover:text-accent" />
-            </a>
+            <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+              Find me on
+            </span>
+            <div className="flex gap-3">
+              <a
+                href="https://github.com/nilaj575"
+                target="_blank"
+                rel="noreferrer"
+                className="group p-2.5 rounded-lg glass hover:shadow-glow hover:-translate-y-0.5 transition-all"
+                aria-label="GitHub"
+              >
+                <FaGithub className="h-5 w-5 group-hover:text-accent transition-colors" />
+              </a>
+              <a
+                href="https://linkedin.com/in/nilaj-jana-648436338"
+                target="_blank"
+                rel="noreferrer"
+                className="group p-2.5 rounded-lg glass hover:shadow-glow-cyan hover:-translate-y-0.5 transition-all"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="h-5 w-5 group-hover:text-accent transition-colors" />
+              </a>
+            </div>
           </motion.div>
         </div>
 
-        {/* Right - profile */}
+        {/* Right — HUD avatar */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, duration: 0.7 }}
-          className="relative mx-auto"
+          className="lg:col-span-5 relative flex justify-center lg:justify-end"
         >
-          <div className="relative h-[360px] w-[360px] md:h-[420px] md:w-[420px]">
-            {/* Rotating ring */}
-            <div className="absolute inset-0 rounded-full animate-spin-slow"
+          <div className="relative w-[340px] h-[340px] md:w-[440px] md:h-[440px]">
+            {/* HUD corner brackets */}
+            <div className="absolute -inset-6 pointer-events-none">
+              <div className="absolute top-0 left-0 h-10 w-10 border-t border-l border-border/60" />
+              <div className="absolute top-0 right-0 h-10 w-10 border-t border-r border-border/60" />
+              <div className="absolute bottom-0 left-0 h-10 w-10 border-b border-l border-border/60" />
+              <div className="absolute bottom-0 right-0 h-10 w-10 border-b border-r border-border/60" />
+            </div>
+
+            {/* Tech label */}
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-[0.3em] text-muted-foreground flex items-center gap-2">
+              <span className="h-px w-8 bg-border" />
+              UI_CORE_V2.0
+              <span className="h-px w-8 bg-border" />
+            </div>
+
+            {/* Layered rings */}
+            <div className="absolute inset-0 rounded-full border border-border/50" />
+            <div className="absolute inset-3 rounded-full border border-dashed border-border/40 animate-spin-slow" />
+            <div className="absolute inset-6 rounded-full border-2 border-accent/10 shadow-glow-cyan" />
+
+            {/* Rotating accent ring */}
+            <div
+              className="absolute inset-0 rounded-full animate-spin-slow"
               style={{
-                background: "conic-gradient(from 0deg, var(--neon), var(--neon-2), transparent 60%, var(--neon))",
-                maskImage: "radial-gradient(circle, transparent 64%, black 65%, black 70%, transparent 71%)",
-                WebkitMaskImage: "radial-gradient(circle, transparent 64%, black 65%, black 70%, transparent 71%)",
+                background:
+                  "conic-gradient(from 0deg, var(--neon), var(--neon-2), transparent 55%, var(--neon))",
+                maskImage:
+                  "radial-gradient(circle, transparent 67%, black 68%, black 71%, transparent 72%)",
+                WebkitMaskImage:
+                  "radial-gradient(circle, transparent 67%, black 68%, black 71%, transparent 72%)",
               }}
             />
-            {/* Glow */}
-            <div className="absolute inset-8 rounded-full animate-pulse-glow" />
-            {/* Avatar */}
-            <div className="absolute inset-10 rounded-full overflow-hidden neon-ring bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center">
-              <div className="text-[10rem] font-bold text-gradient font-display select-none">N</div>
+
+            {/* Inner glow halo */}
+            <div className="absolute inset-10 rounded-full animate-pulse-glow" />
+
+            {/* Avatar core */}
+            <div className="absolute inset-12 rounded-full overflow-hidden neon-ring bg-gradient-to-br from-card via-background to-card group">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,oklch(0.78_0.17_195/0.25),transparent_70%)]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,oklch(0.72_0.2_295/0.25),transparent_70%)]" />
+              {/* Scan line */}
+              <div
+                className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-70"
+                style={{ animation: "scan 4s linear infinite" }}
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-[9rem] md:text-[11rem] font-bold text-transparent bg-clip-text bg-gradient-to-b from-foreground via-foreground/80 to-muted-foreground/40 select-none drop-shadow-2xl group-hover:scale-105 transition-transform duration-700 font-display">
+                  N
+                </span>
+              </div>
+              {/* Inner ring highlight */}
+              <div className="absolute inset-0 rounded-full border border-white/10 shadow-[inset_0_0_40px_rgba(255,255,255,0.04)] pointer-events-none" />
             </div>
-            {/* Floating badges */}
+
+            {/* Floating HUD badges */}
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="absolute -top-2 -left-4 glass rounded-2xl px-4 py-2 font-mono text-xs shadow-glow"
+              className="absolute -top-2 -left-6 glass rounded-xl px-3.5 py-2 font-mono text-[11px] shadow-glow z-10"
             >
-              <span className="text-accent">{"<"}</span>code<span className="text-accent">{" />"}</span>
+              <span className="text-primary">{"<"}</span>code
+              <span className="text-primary">{" />"}</span>
             </motion.div>
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity }}
-              className="absolute bottom-4 -right-2 glass rounded-2xl px-4 py-2 font-mono text-xs shadow-glow-cyan"
+              className="absolute bottom-6 -right-4 glass rounded-xl px-3.5 py-2 font-mono text-[11px] shadow-glow-cyan z-10 flex items-center gap-1.5"
             >
-              ⚡ Full Stack
+              <Sparkles className="h-3 w-3 text-accent" /> Full Stack
             </motion.div>
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 6, repeat: Infinity }}
-              className="absolute top-1/2 -right-8 glass rounded-2xl px-3 py-2 font-mono text-xs"
+              className="absolute top-1/2 -right-10 glass rounded-xl px-3 py-2 font-mono text-[11px] z-10"
             >
-              {"{ }"} clean code
+              <span className="text-accent">{"{ }"}</span> clean_code
+            </motion.div>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 5.5, repeat: Infinity }}
+              className="absolute bottom-0 -left-8 glass rounded-xl px-3 py-2 font-mono text-[10px] z-10 flex items-center gap-1.5"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(74,222,128,0.7)]" />
+              online
             </motion.div>
           </div>
         </motion.div>

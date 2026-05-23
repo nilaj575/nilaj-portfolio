@@ -27,7 +27,7 @@ const groups: { title: string; items: Skill[] }[] = [
       { name: "React.js", icon: SiReact, color: "#61dafb" },
       { name: "Angular", icon: SiAngular, color: "#dd0031" },
       { name: "HTML5", icon: SiHtml5, color: "#e34f26" },
-      { name: "CSS3", icon: SiCss3, color: "#1572b6" },
+      { name: "CSS3", icon: SiCss, color: "#1572b6" },
       { name: "Tailwind", icon: SiTailwindcss, color: "#38bdf8" },
       { name: "Bootstrap", icon: SiBootstrap, color: "#7952b3" },
     ],
@@ -44,7 +44,7 @@ const groups: { title: string; items: Skill[] }[] = [
     title: "Databases",
     items: [
       { name: "MongoDB", icon: SiMongodb, color: "#47a248" },
-      { name: "Oracle SQL", icon: SiOracle, color: "#f80000" },
+      { name: "Oracle SQL", icon: Database, color: "#f80000" },
     ],
   },
   {

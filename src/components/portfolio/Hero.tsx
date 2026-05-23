@@ -245,8 +245,8 @@ export function Hero() {
               />
               {/* Holographic shimmer */}
               <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-1/3"
-                style={{ animation: "shimmer 5s ease-in-out infinite" }}
+                className="pointer-events-none absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-transparent via-white/10 to-transparent"
+                style={{ animation: "hologram 5s ease-in-out infinite" }}
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 {photo ? (

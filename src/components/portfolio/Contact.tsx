@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, Send, MapPin } from "lucide-react";
+import { Mail, Phone, Send, MapPin, Clock, CheckCircle2 } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SectionHeading } from "./SectionHeading";
 
@@ -24,8 +24,9 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28">
-      <div className="mx-auto max-w-6xl px-4">
+    <section id="contact" className="relative py-28 overflow-hidden">
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 h-[500px] w-[700px] rounded-full bg-primary/10 blur-[140px]" />
+      <div className="mx-auto max-w-6xl px-4 relative">
         <SectionHeading
           eyebrow="get in touch"
           title={<>Let's <span className="text-gradient">build</span> something</>}
@@ -35,6 +36,24 @@ export function Contact() {
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-6">
           {/* Channels */}
           <div className="space-y-3">
+            {/* status banner */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="glass rounded-2xl p-4 flex items-center gap-3"
+            >
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              </span>
+              <div className="flex-1">
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">Status</div>
+                <div className="text-sm font-medium">Available — reply in &lt; 24h</div>
+              </div>
+              <Clock className="h-4 w-4 text-accent" />
+            </motion.div>
+
             {channels.map((c, i) => (
               <motion.a
                 key={c.label}
@@ -46,17 +65,21 @@ export function Contact() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.06 }}
                 whileHover={{ x: 4 }}
-                className="group flex items-center gap-4 glass rounded-2xl p-4 hover:border-primary/60 hover:shadow-glow transition-all"
+                className="group relative flex items-center gap-4 glass rounded-2xl p-4 hover:border-primary/60 hover:shadow-glow transition-all overflow-hidden"
               >
+                <div className="absolute inset-y-0 left-0 w-1 bg-gradient-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                 <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-primary text-primary-foreground shadow-glow group-hover:scale-110 transition-transform">
                   <c.icon className="h-5 w-5" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground">
+                  <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
                     {c.label}
                   </div>
                   <div className="text-sm font-medium truncate">{c.value}</div>
                 </div>
+                <span className="font-mono text-[10px] text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity">
+                  →
+                </span>
               </motion.a>
             ))}
             <div className="glass rounded-2xl p-4 flex items-center gap-3 text-sm text-muted-foreground">
@@ -70,8 +93,19 @@ export function Contact() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass rounded-3xl p-6 md:p-8 shadow-card space-y-5"
+            className="relative glass rounded-3xl p-6 md:p-8 shadow-card space-y-5"
           >
+            {/* corner brackets */}
+            <span className="absolute -top-1 -left-1 h-5 w-5 border-t-2 border-l-2 border-accent/60 rounded-tl-2xl" />
+            <span className="absolute -top-1 -right-1 h-5 w-5 border-t-2 border-r-2 border-accent/60 rounded-tr-2xl" />
+            <span className="absolute -bottom-1 -left-1 h-5 w-5 border-b-2 border-l-2 border-primary/60 rounded-bl-2xl" />
+            <span className="absolute -bottom-1 -right-1 h-5 w-5 border-b-2 border-r-2 border-primary/60 rounded-br-2xl" />
+
+            <div className="flex items-center justify-between pb-4 border-b border-border/60">
+              <div className="font-mono text-xs text-accent">{"// send_message()"}</div>
+              <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">FORM.v2</div>
+            </div>
+
             <div className="grid md:grid-cols-2 gap-4">
               <Field label="Your name">
                 <input
@@ -105,10 +139,21 @@ export function Contact() {
             </Field>
             <button
               type="submit"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.01] active:scale-100 transition-transform"
+              className="group relative inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.01] active:scale-100 transition-transform overflow-hidden"
             >
-              {sent ? "Opening your email client..." : "Send message"}
-              <Send className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <span className="absolute inset-0 translate-y-full bg-white/15 transition-transform duration-300 group-hover:translate-y-0" />
+              <span className="relative flex items-center gap-2">
+                {sent ? (
+                  <>
+                    <CheckCircle2 className="h-4 w-4" /> Opening your email client...
+                  </>
+                ) : (
+                  <>
+                    Send message
+                    <Send className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </span>
             </button>
           </motion.form>
         </div>

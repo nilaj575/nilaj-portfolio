@@ -9,6 +9,7 @@ type Project = {
   features: string[];
   stack: string[];
   accent: "violet" | "cyan" | "pink" | "amber";
+  status: "live" | "wip";
 };
 
 const projects: Project[] = [
@@ -20,6 +21,7 @@ const projects: Project[] = [
     features: ["Real-time order tracking", "Payment integration", "Auth system", "Chat with food partners"],
     stack: ["Next.js", "Node.js", "Socket.io", "MongoDB", "Tailwind"],
     accent: "violet",
+    status: "live",
   },
   {
     title: "Chess Game",
@@ -29,6 +31,7 @@ const projects: Project[] = [
     features: ["Real-time gameplay", "Multiplayer support", "Spectator mode", "Socket.io engine"],
     stack: ["Node.js", "Express", "Socket.io", "JavaScript"],
     accent: "cyan",
+    status: "live",
   },
   {
     title: "Live Tracker",
@@ -38,6 +41,7 @@ const projects: Project[] = [
     features: ["Live location tracking", "Dynamic map updates", "Live markers"],
     stack: ["Node.js", "Socket.io", "Leaflet", "Express"],
     accent: "pink",
+    status: "live",
   },
   {
     title: "NewsMonkey",
@@ -47,6 +51,7 @@ const projects: Project[] = [
     features: ["News API integration", "Category filtering", "Responsive UI"],
     stack: ["React.js", "Bootstrap", "News API"],
     accent: "amber",
+    status: "live",
   },
 ];
 
@@ -78,11 +83,18 @@ export function Projects() {
               whileHover={{ y: -8 }}
               className="group relative glass rounded-3xl overflow-hidden shadow-card hover:border-primary/60 transition-all"
             >
+              {/* index badge */}
+              <span className="absolute top-3 left-1/2 -translate-x-1/2 z-20 font-mono text-[10px] uppercase tracking-[0.3em] text-background/70 bg-background/20 backdrop-blur-md rounded-full px-3 py-0.5">
+                project_{(i + 1).toString().padStart(2, "0")}
+              </span>
+
               {/* Preview header */}
               <div className={`relative h-44 bg-gradient-to-br ${accentMap[p.accent]} overflow-hidden`}>
                 <div className="absolute inset-0 grid-bg opacity-40" />
+                {/* scanning shimmer */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="font-mono text-5xl md:text-6xl font-bold text-background/90 tracking-tight px-6 text-center">
+                  <div className="font-display text-5xl md:text-6xl font-bold text-background/90 tracking-tight px-6 text-center drop-shadow-lg">
                     {p.title.split("-")[0]}
                   </div>
                 </div>
@@ -91,19 +103,26 @@ export function Projects() {
                   <span className="h-2.5 w-2.5 rounded-full bg-background/40" />
                   <span className="h-2.5 w-2.5 rounded-full bg-background/40" />
                 </div>
-                <div className="absolute top-3 right-3 glass rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider">
+                <div className="absolute bottom-3 left-3 glass rounded-full px-3 py-1 text-[10px] font-mono uppercase tracking-wider">
                   {p.tagline}
+                </div>
+                <div className="absolute bottom-3 right-3 flex items-center gap-1.5 glass rounded-full px-2.5 py-1 text-[10px] font-mono">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  {p.status}
                 </div>
               </div>
 
               <div className="p-6">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl font-semibold">{p.title}</h3>
+                  <h3 className="text-xl font-semibold group-hover:text-gradient transition-all">{p.title}</h3>
                   <a
                     href="https://github.com/nilaj575"
                     target="_blank"
                     rel="noreferrer"
-                    className="opacity-60 group-hover:opacity-100 transition-opacity"
+                    className="opacity-60 group-hover:opacity-100 group-hover:rotate-45 transition-all"
                     aria-label="View project"
                   >
                     <ArrowUpRight className="h-5 w-5" />
@@ -114,7 +133,7 @@ export function Projects() {
                 <ul className="mt-4 grid grid-cols-2 gap-1.5">
                   {p.features.map((f) => (
                     <li key={f} className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <span className="h-1 w-1 rounded-full bg-accent" />
+                      <span className="h-1 w-1 rounded-full bg-accent shadow-glow-cyan" />
                       {f}
                     </li>
                   ))}
@@ -124,7 +143,7 @@ export function Projects() {
                   {p.stack.map((s) => (
                     <span
                       key={s}
-                      className="rounded-full border border-border bg-muted/40 px-2.5 py-0.5 text-[11px] font-mono text-muted-foreground"
+                      className="rounded-full border border-border bg-muted/40 px-2.5 py-0.5 text-[11px] font-mono text-muted-foreground hover:border-accent/60 hover:text-accent transition-colors"
                     >
                       {s}
                     </span>
@@ -142,7 +161,7 @@ export function Projects() {
                   </a>
                   <a
                     href="#"
-                    className="inline-flex items-center gap-2 rounded-lg bg-gradient-primary px-3 py-2 text-xs font-medium text-primary-foreground shadow-glow"
+                    className="inline-flex items-center gap-2 rounded-lg bg-gradient-primary px-3 py-2 text-xs font-medium text-primary-foreground shadow-glow hover:scale-105 transition-transform"
                   >
                     <ExternalLink className="h-4 w-4" /> Live
                   </a>

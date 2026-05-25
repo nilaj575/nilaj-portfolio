@@ -5,8 +5,8 @@ import { Mail, Phone, Send, MapPin, Clock, CheckCircle2, Loader2, AlertCircle } 
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SectionHeading } from "./SectionHeading";
 
-const EMAILJS_SERVICE_ID = "service_q54kkep";
-const EMAILJS_TEMPLATE_ID = "REPLACE_WITH_TEMPLATE_ID"; // paste your template_xxxxxxx
+const EMAILJS_SERVICE_ID = "service_1ebl7vs";
+const EMAILJS_TEMPLATE_ID = "template_p5wua5v";
 const EMAILJS_PUBLIC_KEY = "-xaOzSN7lEdxrsfEE";
 
 const channels = [

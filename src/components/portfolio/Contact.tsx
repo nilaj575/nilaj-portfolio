@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, Send, MapPin, Clock, CheckCircle2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { Mail, Phone, Send, MapPin, Clock, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SectionHeading } from "./SectionHeading";
+
+const EMAILJS_SERVICE_ID = "service_q54kkep";
+const EMAILJS_TEMPLATE_ID = "REPLACE_WITH_TEMPLATE_ID"; // paste your template_xxxxxxx
+const EMAILJS_PUBLIC_KEY = "-xaOzSN7lEdxrsfEE";
 
 const channels = [
   { icon: Mail, label: "Email", value: "jananilaj6@gmail.com", href: "mailto:jananilaj6@gmail.com" },
@@ -11,16 +16,35 @@ const channels = [
   { icon: FaLinkedin, label: "LinkedIn", value: "nilaj-jana", href: "https://linkedin.com/in/nilaj-jana-648436338" },
 ];
 
+type Status = "idle" | "sending" | "sent" | "error";
+
 export function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:jananilaj6@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      console.error("EmailJS error", err);
+      setErrorMsg(err?.text || "Failed to send. Please try again.");
+      setStatus("error");
+    }
   };
 
   return (

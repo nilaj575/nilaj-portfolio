@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, Send, MapPin, Clock, CheckCircle2 } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { Mail, Phone, Send, MapPin, Clock, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { SectionHeading } from "./SectionHeading";
+
+const EMAILJS_SERVICE_ID = "service_q54kkep";
+const EMAILJS_TEMPLATE_ID = "REPLACE_WITH_TEMPLATE_ID"; // paste your template_xxxxxxx
+const EMAILJS_PUBLIC_KEY = "-xaOzSN7lEdxrsfEE";
 
 const channels = [
   { icon: Mail, label: "Email", value: "jananilaj6@gmail.com", href: "mailto:jananilaj6@gmail.com" },
@@ -11,16 +16,35 @@ const channels = [
   { icon: FaLinkedin, label: "LinkedIn", value: "nilaj-jana", href: "https://linkedin.com/in/nilaj-jana-648436338" },
 ];
 
+type Status = "idle" | "sending" | "sent" | "error";
+
 export function Contact() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
-    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
-    window.location.href = `mailto:jananilaj6@gmail.com?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    } catch (err: any) {
+      console.error("EmailJS error", err);
+      setErrorMsg(err?.text || "Failed to send. Please try again.");
+      setStatus("error");
+    }
   };
 
   return (
@@ -139,20 +163,15 @@ export function Contact() {
             </Field>
             <button
               type="submit"
-              className="group relative inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.01] active:scale-100 transition-transform overflow-hidden"
+              disabled={status === "sending"}
+              className="group relative inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.01] active:scale-100 transition-transform overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <span className="absolute inset-0 translate-y-full bg-white/15 transition-transform duration-300 group-hover:translate-y-0" />
               <span className="relative flex items-center gap-2">
-                {sent ? (
-                  <>
-                    <CheckCircle2 className="h-4 w-4" /> Opening your email client...
-                  </>
-                ) : (
-                  <>
-                    Send message
-                    <Send className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </>
-                )}
+                {status === "sending" && (<><Loader2 className="h-4 w-4 animate-spin" /> Sending...</>)}
+                {status === "sent" && (<><CheckCircle2 className="h-4 w-4" /> Message sent — I'll reply soon!</>)}
+                {status === "error" && (<><AlertCircle className="h-4 w-4" /> {errorMsg || "Try again"}</>)}
+                {status === "idle" && (<>Send message <Send className="h-4 w-4 group-hover:translate-x-1 transition-transform" /></>)}
               </span>
             </button>
           </motion.form>

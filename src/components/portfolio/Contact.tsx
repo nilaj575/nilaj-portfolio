@@ -163,20 +163,15 @@ export function Contact() {
             </Field>
             <button
               type="submit"
-              className="group relative inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.01] active:scale-100 transition-transform overflow-hidden"
+              disabled={status === "sending"}
+              className="group relative inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-[1.01] active:scale-100 transition-transform overflow-hidden disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <span className="absolute inset-0 translate-y-full bg-white/15 transition-transform duration-300 group-hover:translate-y-0" />
               <span className="relative flex items-center gap-2">
-                {sent ? (
-                  <>
-                    <CheckCircle2 className="h-4 w-4" /> Opening your email client...
-                  </>
-                ) : (
-                  <>
-                    Send message
-                    <Send className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                  </>
-                )}
+                {status === "sending" && (<><Loader2 className="h-4 w-4 animate-spin" /> Sending...</>)}
+                {status === "sent" && (<><CheckCircle2 className="h-4 w-4" /> Message sent — I'll reply soon!</>)}
+                {status === "error" && (<><AlertCircle className="h-4 w-4" /> {errorMsg || "Try again"}</>)}
+                {status === "idle" && (<>Send message <Send className="h-4 w-4 group-hover:translate-x-1 transition-transform" /></>)}
               </span>
             </button>
           </motion.form>

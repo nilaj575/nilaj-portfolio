@@ -18,7 +18,7 @@ export default defineConfig({
   },
   vite: {
     server: {
-      allowedHosts: ["nilaj-portfolio-1.onrender.com"],
+      allowedHosts: ["nilaj-portfolio-1.onrender.com", "localhost", "127.0.0.1"],
     },
   },
 });

@@ -174,3 +174,11 @@
 }
 
 ::selection { background: oklch(0.72 0.2 295 / 40%); color: white; }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  scrollbar-width: none;
+}

@@ -1,0 +1,27 @@
+import { jsx } from "react/jsx-runtime";
+import { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+function ScrollToTop() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 600);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return /* @__PURE__ */ jsx(AnimatePresence, { children: show && /* @__PURE__ */ jsx(
+    motion.button,
+    {
+      initial: { opacity: 0, scale: 0.6 },
+      animate: { opacity: 1, scale: 1 },
+      exit: { opacity: 0, scale: 0.6 },
+      onClick: () => window.scrollTo({ top: 0, behavior: "smooth" }),
+      "aria-label": "Scroll to top",
+      className: "fixed bottom-6 right-6 z-50 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-primary text-primary-foreground shadow-glow hover:scale-110 transition-transform",
+      children: /* @__PURE__ */ jsx(ArrowUp, { className: "h-5 w-5" })
+    }
+  ) });
+}
+export {
+  ScrollToTop
+};

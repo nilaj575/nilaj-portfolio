@@ -112,7 +112,7 @@ export const Hero = () => {
           <div className="flex gap-4 mt-8">
 
             <a
-              href="https://github.com/yourgithub"
+              href="https://github.com/nilaj575"
               target="_blank"
               rel="noreferrer"
             >
@@ -120,7 +120,7 @@ export const Hero = () => {
             </a>
 
             <a
-              href="https://linkedin.com/in/yourlinkedin"
+              href="linkedin.com/in/nilaj-jana-648436338"
               target="_blank"
               rel="noreferrer"
             >

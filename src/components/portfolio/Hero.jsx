@@ -120,7 +120,7 @@ export const Hero = () => {
             </a>
 
             <a
-              href="linkedin.com/in/nilaj-jana-648436338"
+              href="https://linkedin.com/in/nilaj-jana-648436338"
               target="_blank"
               rel="noreferrer"
             >

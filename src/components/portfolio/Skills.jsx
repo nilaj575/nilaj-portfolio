@@ -37,9 +37,8 @@ const groups = [
     tag: "ui",
     items: [
       { name: "React.js", icon: SiReact, color: "#61dafb", level: 95 },
-      { name: "Angular", icon: SiAngular, color: "#dd0031", level: 70 },
-      { name: "HTML5", icon: SiHtml5, color: "#e34f26", level: 95 },
-      { name: "CSS3", icon: SiCss, color: "#1572b6", level: 90 },
+      { name: "HTML", icon: SiHtml5, color: "#e34f26", level: 95 },
+      { name: "CSS", icon: SiCss, color: "#1572b6", level: 90 },
       { name: "Tailwind", icon: SiTailwindcss, color: "#38bdf8", level: 95 },
       { name: "Bootstrap", icon: SiBootstrap, color: "#7952b3", level: 85 }
     ]

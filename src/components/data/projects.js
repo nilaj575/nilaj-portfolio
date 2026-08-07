@@ -104,7 +104,7 @@ export const projects = [
       "React-based news application using News API.",
 
     github: "https://github.com/nilaj575/new-monkey.git",
-    live: "https://newsmonkey.vercel.app",
+    live: "https://new-monkey-peb2-lac.vercel.app",
 
     features: [
       "News API",

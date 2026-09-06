@@ -1,29 +1,34 @@
 export const projects = [
-  {
+    {
     id: 1,
-    title: "Foody-Rells-App",
-    tagline: "Full-stack food delivery + social",
+    title: "MERN FOOD ORDERING APP",
+    tagline: "Full-stack food ordering platform with AI menu generation and review analysis",
     description:
-      "A powerful eCommerce food delivery app inspired by Zomato + Instagram.",
+      "A full-stack food delivery and restaurant management application.",
 
-    github: "https://github.com/nilaj575/Foody-Reels-App.git",
-    live: "https://foodyreels.vercel.app",
+    github: "https://github.com/nilaj575/Food-app-intern",
+    live: "https://food-intern.netlify.app/",
 
     features: [
-      "Real-time order tracking",
-      "Payment integration",
-      "Auth system",
-      "Chat with food partners",
+      "AI-powered dish description & metadata generation",
+      "AI review sentiment analysis & summary",
+      "Secure online payments via Stripe",
+      "Shopping cart & coupon system",
+      "User authentication & profile management",
+      "Restaurant & menu management",
     ],
 
     stack: [
-      "Next.js",
+      "React",
       "Node.js",
-      "Socket.io",
       "MongoDB",
-      "Tailwind",
+      "Redux Toolkit",
+      "Stripe",
+      "Groq AI",
     ],
   },
+
+  
   {
     id: 2,
     title: "INTERVIEW-AI",
@@ -47,9 +52,34 @@ export const projects = [
       "JavaScript",
     ],
   },
-
   {
     id: 3,
+    title: "Foody-Rells-App",
+    tagline: "Full-stack food delivery + social",
+    description:
+      "A powerful eCommerce food delivery app inspired by Zomato + Instagram.",
+
+    github: "https://github.com/nilaj575/Foody-Reels-App.git",
+    live: "https://foodyreels.vercel.app",
+
+    features: [
+      "Real-time order tracking",
+      "Payment integration",
+      "Auth system",
+      "Chat with food partners",
+    ],
+
+    stack: [
+      "Next.js",
+      "Node.js",
+      "Socket.io",
+      "MongoDB",
+      "Tailwind",
+    ],
+  },
+
+  {
+    id: 4,
     title: "Chess Game",
     tagline: "Real-time multiplayer chess",
     description:
@@ -73,7 +103,7 @@ export const projects = [
   },
 
   {
-    id: 4,
+    id: 5,
     title: "Live Tracker",
     tagline: "Real-time location tracking",
     description:
@@ -97,7 +127,7 @@ export const projects = [
   },
 
   {
-    id: 5,
+    id: 6,
     title: "NewsMonkey",
     tagline: "Categorized news reader",
     description:

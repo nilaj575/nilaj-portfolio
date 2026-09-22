@@ -60,7 +60,7 @@ export const projects = [
       "A powerful eCommerce food delivery app inspired by Zomato + Instagram.",
 
     github: "https://github.com/nilaj575/Foody-Reels-App.git",
-    live: "https://foodyreels.vercel.app",
+    live: "https://foody-reels-app-latest.onrender.com/app",
 
     features: [
       "Real-time order tracking",

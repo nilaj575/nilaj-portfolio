@@ -37,7 +37,7 @@ export const projects = [
       "use google gemini to LLM model to create this app",
 
     github: "https://github.com/nilaj575/INTERVIEW-AI.git",
-    live: "https://interview-ai-nilaj.vercel.app/",
+    live: "https://interview-ai-latest-1.onrender.com/",
 
     features: [
       "Generate Resume",
